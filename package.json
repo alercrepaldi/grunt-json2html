@@ -1,0 +1,42 @@
+{
+  "name": "grunt-json2html",
+  "description": "Compile inline json file into static html from template",
+  "version": "0.1.0",
+  "homepage": "https://github.com/alercrepaldi/grunt-json2html",
+  "author": {
+    "name": "alercrepaldi",
+    "email": "aler.crepaldi@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/alercrepaldi/grunt-json2html.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alercrepaldi/grunt-json2html/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/alercrepaldi/grunt-json2html/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.1"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
