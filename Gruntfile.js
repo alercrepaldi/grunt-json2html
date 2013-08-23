@@ -30,28 +30,20 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     json2html: {
-      default_options: {
+      test: {
         options: {
+          templatesBaseDir: 'test/templates'
         },
         files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123'],
-        },
-      },
-      custom_options: {
-        options: {
-          separator: ': ',
-          punctuation: ' !!!',
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123'],
-        },
-      },
+          'test/fixtures/': ['test/*.html']
+        }
+      }
     },
 
     // Unit tests.
     nodeunit: {
       tests: ['test/*_test.js'],
-    },
+    }
 
   });
 
@@ -65,9 +57,9 @@ module.exports = function(grunt) {
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'json2html', 'nodeunit']);
+  grunt.registerTask('test', ['clean', 'json2html:test', 'nodeunit']);
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'test']);
+  grunt.registerTask('default', ['json2html:default_options']);
 
 };

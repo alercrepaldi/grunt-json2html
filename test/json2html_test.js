@@ -23,26 +23,23 @@ var grunt = require('grunt');
 */
 
 exports.json2html = {
-  setUp: function(done) {
+  /*setUp: function(done) {
     // setup here if necessary
     done();
-  },
-  default_options: function(test) {
-    test.expect(1);
+  },*/
+  test: function(test) {
 
-    var actual = grunt.file.read('tmp/default_options');
-    var expected = grunt.file.read('test/expected/default_options');
-    test.equal(actual, expected, 'should describe what the default behavior is.');
+    test.expect(2);
 
-    test.done();
-  },
-  custom_options: function(test) {
-    test.expect(1);
+    var actual = grunt.file.read('test/fixtures/index.html');
+    var expected = grunt.file.read('test/expected/index.html');
+    test.equal(actual, expected, 'The commands has to be compiled');
 
-    var actual = grunt.file.read('tmp/custom_options');
-    var expected = grunt.file.read('test/expected/custom_options');
-    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
+    actual = grunt.file.read('test/fixtures/other.html');
+    expected = grunt.file.read('test/expected/other.html');
+    test.equal(actual, expected, 'The commands has to be compiled');
 
     test.done();
-  },
+  }
+  
 };
