@@ -46,7 +46,6 @@ The folder where the html templates are.
 
 ### Usage Examples
 
-#### Default Options
 In this example, all the file .html in the base folder will be "compiled" in html file into the dev folder (with 1 to 1 mapping) using the templates
 in the templates folder. 
 

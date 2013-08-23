@@ -1,7 +1,7 @@
 {
   "name": "grunt-json2html",
   "description": "Compile inline json file into static html from template",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/alercrepaldi/grunt-json2html",
   "author": {
     "name": "alercrepaldi",
