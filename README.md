@@ -25,65 +25,135 @@ In your project's Gruntfile, add a section named `json2html` to the data object 
 ```js
 grunt.initConfig({
   json2html: {
-    options: {
-      // Task-specific options go here.
+      dev: {
+        options: {
+          templatesBaseDir: 'templates'
+        },
+        files: {
+          'dev/': ['*.html']
+        }
+      }
     },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
 })
 ```
 
 ### Options
 
-#### options.separator
+#### options.templatesBaseDir
 Type: `String`
 Default value: `',  '`
 
-A string value that is used to do something with whatever.
-
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
+The folder where the html templates are.
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, all the file .html in the base folder will be "compiled" in html file into the dev folder (with 1 to 1 mapping) using the templates
+in the templates folder. 
 
 ```js
 grunt.initConfig({
   json2html: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    dev: {
+        options: {
+          templatesBaseDir: 'templates'
+        },
+        files: {
+          'dev/': ['*.html']
+        }
+      }
   },
 })
 ```
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+so the file index.html
 
-```js
-grunt.initConfig({
-  json2html: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
+```html
+<html>
+  <head>
+      <title>grunt-json2html - Test Page</title>
+  </head>
+  <body id="landing-page">
+
+    <!-- fillAndPaste template1 -->
+    {
+        "name": "Aler",
+        "birthday": "14 Oct 1987",
+        "plugin": "json2html",
+        "passions": ["Ju Jitsu", "Aikido", "Origami"]
+    }
+    <!-- /fillAndPaste -->
+
+    <!-- fillAndPaste template2 -->
+    {
+        "name": "Aler",
+        "birthday": "14 Oct 1987",
+        "passions": ["Ju Jistu", "Aikido", "Origami"]
+    }
+    <!-- /fillAndPaste -->
+
+    <!-- fillAndPaste template3 --> <!-- /fillAndPaste -->
+
+  </body>
+</html>
+```
+given the 3 templates: templates/template1.html, templates/template2.html and templates/template3.html
+
+```html
+<h1><%= name %></h1>
+<h2><%= birthday %></h2>
+<p><%= plugin %></p>
+<ul><% _.forEach(passions, function(passion) { %>
+  <li><%= passion %></li><% 
+}); 
+%>
+</ul>
 ```
 
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+```html
+<div style="background-color:red">
+  <h1><%= name %></h1>
+  <h6><%= birthday %></h6>
+  <p><%= plugin %></p>  
+</div>
+```
+
+```html
+<h1>Static template</h1>
+<p>Maybe it's not so exciting to have static templates bat it can be useful!</p>
+```
+
+will be "compiled" into the following file (dev/index.html)
+
+```html
+<html>
+  <head>
+      <title>grunt-json2html - Test Page</title>
+  </head>
+  <body id="landing-page">
+
+    <h1>Aler</h1>
+    <h2>14 Oct 1987</h2>
+    <p>json2html</p>
+    <ul>
+      <li>Ju Jitsu</li>
+      <li>Aikido</li>
+      <li>Origami</li>
+    </ul>
+
+    <div style="background-color:red">
+      <h1>Aler</h1>
+      <h6>14 Oct 1987</h6>
+      <p></p> 
+    </div>
+
+    <h1>Static template</h1>
+    <p>Maybe it's not so exciting to have static templates bat it can be useful!</p>
+
+  </body>
+</html>
+```
+
 
 ## Release History
 _(Nothing yet)_
